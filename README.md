@@ -4,7 +4,7 @@
 
 ResolveAI is an AI-powered incident management platform that helps organizations **detect, classify, investigate, and resolve IT incidents faster** using Machine Learning, NLP, semantic search, and knowledge-based recommendations.
 
-## ✨ Features
+##  ✨  Features
 
 * 📝 Incident creation and management
 * 🤖 AI-powered incident classification
