@@ -1,0 +1,415 @@
+I DO NOT want you to modify, rebuild, redesign, or rewrite the project yet.
+
+I want you to perform a COMPLETE TECHNICAL FUNCTIONALITY AUDIT of the CURRENT IncidAI application and tell me exactly what is already connected and working.
+
+This is an EXISTING project. Do not assume that something works just because the code exists. Actually inspect the code, configuration, running services, API requests, database configuration, and available tests. Run safe tests where possible.
+
+IMPORTANT:
+DO NOT make changes during this audit.
+DO NOT install unnecessary packages.
+DO NOT rewrite code.
+DO NOT create mock functionality.
+DO NOT claim something is working unless you have evidence.
+
+==================================================
+1. FRONTEND
+==================================================
+
+Check:
+
+- What frontend framework is being used?
+- Does the frontend start successfully?
+- Does the production build succeed?
+- Are all major pages/routes working?
+- Are buttons and forms connected to real functionality?
+- Is the dashboard using real API data or hardcoded/mock data?
+- Are incident lists using real backend data?
+- Does incident creation use the backend API?
+- Does incident updating use the backend API?
+
+Report:
+
+Frontend: PASS / PARTIAL / FAIL
+
+==================================================
+2. BACKEND
+==================================================
+
+Check:
+
+- What backend framework is being used?
+- Does the backend start successfully?
+- What API endpoints exist?
+- Which endpoints are actually used by the frontend?
+- Are incident CRUD APIs implemented?
+- Are validation and error handling implemented?
+- Is CORS correctly configured?
+- Are API requests returning successful responses?
+
+Actually test the important endpoints where possible.
+
+Report:
+
+Backend: PASS / PARTIAL / FAIL
+
+List the important API endpoints you found.
+
+==================================================
+3. FRONTEND ↔ BACKEND CONNECTION
+==================================================
+
+This is VERY IMPORTANT.
+
+Determine whether the frontend is actually communicating with the backend.
+
+Trace the real flow:
+
+React frontend
+↓
+API request
+↓
+Backend endpoint
+↓
+Database/service
+↓
+API response
+↓
+Frontend
+
+Check:
+
+- API base URL
+- Environment variables
+- localhost assumptions
+- Production API URL
+- CORS
+- HTTP methods
+- Request payloads
+- Response handling
+- Authentication headers if applicable
+
+Actually test at least:
+
+GET incidents
+POST/create incident
+GET incident details
+UPDATE incident/status
+
+Report:
+
+Frontend ↔ Backend: PASS / PARTIAL / FAIL
+
+Provide evidence.
+
+==================================================
+4. DATABASE
+==================================================
+
+Determine:
+
+- Which database is actually being used?
+- PostgreSQL / SQLite / other?
+- Where is the database configured?
+- Are migrations available?
+- Do migrations run successfully?
+- Does the backend successfully connect to the database?
+- What database models/tables are being used?
+- Are incidents actually stored in the database?
+- Are dashboard statistics calculated from database records?
+
+Perform a persistence test if possible:
+
+1. Create an incident.
+2. Verify it is returned by the backend.
+3. Verify it persists after refreshing/restarting the frontend.
+
+Do NOT create fake data just to make this test pass.
+
+Report:
+
+Database: PASS / PARTIAL / FAIL
+
+==================================================
+5. INCIDENT MANAGEMENT
+==================================================
+
+Test the complete workflow:
+
+Create incident
+↓
+Retrieve incident
+↓
+View incident details
+↓
+Update incident
+↓
+Change status
+↓
+Resolve or escalate
+↓
+Retrieve again
+
+Check whether changes actually persist.
+
+Report each separately:
+
+Create: PASS / FAIL
+Read/List: PASS / FAIL
+Details: PASS / FAIL
+Update: PASS / FAIL
+Status: PASS / FAIL
+Resolve/Escalate: PASS / FAIL
+
+==================================================
+6. AI / MACHINE LEARNING
+==================================================
+
+Inspect the EXISTING AI/ML implementation.
+
+Specifically check:
+
+- XGBoost
+- BERT
+- FastAPI ML service
+- model files
+- inference code
+- preprocessing
+- prediction endpoints
+- classification logic
+- model dependencies
+
+Do NOT assume these work just because files exist.
+
+Determine:
+
+1. Is the actual model available?
+2. Can the model load?
+3. Can inference execute?
+4. Is the backend actually calling the model?
+5. Is the frontend actually receiving the model result?
+6. Are the results real model predictions or hardcoded/mock values?
+
+If possible, perform one real classification test using an incident description.
+
+Report:
+
+ML functionality: PASS / PARTIAL / FAIL
+
+For each model:
+
+XGBoost: PASS / PARTIAL / FAIL
+BERT: PASS / PARTIAL / FAIL
+FastAPI ML service: PASS / PARTIAL / FAIL
+
+Explain exactly what was tested.
+
+==================================================
+7. RAG / FAISS
+==================================================
+
+Inspect the existing RAG implementation.
+
+Check:
+
+- FAISS
+- embeddings
+- vector index
+- knowledge base
+- retrieval
+- RAG pipeline
+- similarity search
+- recommendation generation
+
+Determine whether:
+
+Incident
+↓
+Embedding
+↓
+FAISS retrieval
+↓
+Relevant knowledge
+↓
+Recommendation
+
+actually works.
+
+Do not claim RAG is working merely because FAISS is installed or code exists.
+
+Report:
+
+RAG: PASS / PARTIAL / FAIL
+
+==================================================
+8. AI INCIDENT WORKFLOW
+==================================================
+
+Determine whether the actual application currently supports:
+
+Incident
+↓
+Classification
+↓
+Priority/Severity
+↓
+Investigation
+↓
+AI analysis
+↓
+Recommendation
+↓
+Resolution
+↓
+Resolved/Escalated
+
+For each step report:
+
+PASS / PARTIAL / FAIL / NOT IMPLEMENTED
+
+==================================================
+9. AUTHENTICATION
+==================================================
+
+If authentication exists, test:
+
+- Login
+- Logout
+- Protected routes
+- Session/token handling
+- Backend authentication
+
+Report:
+
+Authentication: PASS / PARTIAL / FAIL / NOT IMPLEMENTED
+
+==================================================
+10. ENVIRONMENT VARIABLES AND SECRETS
+==================================================
+
+Inspect configuration and tell me:
+
+- Required environment variables
+- Database variables
+- API URLs
+- ML service URLs
+- AI API keys if required
+- Other required secrets
+
+DO NOT reveal the values of any secrets.
+
+Tell me only the variable names and whether each is configured.
+
+Example:
+
+DATABASE_URL — configured
+API_BASE_URL — configured
+SECRET_KEY — configured
+OPENAI_API_KEY — missing
+
+Never print actual secret values.
+
+==================================================
+11. DEPLOYMENT
+==================================================
+
+Determine the CURRENT deployment status.
+
+Specifically distinguish:
+
+A. Local development
+B. Replit development/preview URL
+C. Replit production deployment
+D. Public production URL
+
+Do NOT call a development preview a production deployment.
+
+Check whether:
+
+- Production build succeeds
+- Backend is available in production
+- Database is available in production
+- Frontend points to production backend
+- ML service is available in production
+- Environment variables are configured for production
+- Public URL works
+
+If there is a production deployment, actually test it.
+
+Report:
+
+Development preview: PASS / FAIL
+Production deployment: PASS / FAIL / NOT DEPLOYED
+Production URL: provide it only if actually verified
+
+==================================================
+12. ERRORS
+==================================================
+
+Check for:
+
+- Browser console errors
+- API errors
+- HTTP 4xx/5xx
+- Backend exceptions
+- Database errors
+- CORS errors
+- Build errors
+- Missing dependencies
+- Missing environment variables
+- ML model loading errors
+- RAG errors
+
+List the important errors.
+
+==================================================
+13. FINAL STATUS TABLE
+==================================================
+
+At the end, give me a table exactly like this:
+
+Component | Status | Evidence
+Frontend | PASS/PARTIAL/FAIL | ...
+Backend | PASS/PARTIAL/FAIL | ...
+API | PASS/PARTIAL/FAIL | ...
+Frontend↔Backend | PASS/PARTIAL/FAIL | ...
+Database | PASS/PARTIAL/FAIL | ...
+Incident CRUD | PASS/PARTIAL/FAIL | ...
+Classification | PASS/PARTIAL/FAIL | ...
+XGBoost | PASS/PARTIAL/FAIL | ...
+BERT | PASS/PARTIAL/FAIL | ...
+RAG/FAISS | PASS/PARTIAL/FAIL | ...
+AI workflow | PASS/PARTIAL/FAIL | ...
+Authentication | PASS/PARTIAL/FAIL/N/A | ...
+Production deployment | PASS/PARTIAL/FAIL | ...
+
+==================================================
+MOST IMPORTANT
+==================================================
+
+Do NOT fix anything yet.
+
+Do NOT redesign anything.
+
+Do NOT generate a new implementation.
+
+Do NOT tell me what "could" work.
+
+I want to know what ACTUALLY WORKS RIGHT NOW.
+
+If something is PASS, give evidence.
+
+If something is PARTIAL, explain exactly what is missing.
+
+If something is FAIL, explain the exact failure.
+
+If something has not been tested, say NOT TESTED instead of assuming it works.
+
+At the end, tell me:
+
+1. What is already fully functional.
+2. What is partially functional.
+3. What is not connected.
+4. What is missing.
+5. What MUST be fixed before this can be considered a fully functional hackathon application.
+
+Do not make any code changes until I review this report.
