@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "IncidAI"
+description = "An AI-assisted IT incident management system built from the existing IncidAI repository. It lets service-desk teams report, classify, investigate, resolve, verify, and track incidents using persistent data and historical ticket evidence."
+version = "1.0.0"
+id = "artifacts/incidai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22410
+
+[services.development]
+run = "pnpm --filter @workspace/incidai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/incidai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/incidai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22410"
+BASE_PATH = "/"

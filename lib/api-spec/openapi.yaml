@@ -3,34 +3,409 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: IncidAI incident-management API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: incidents
+    description: Incident lifecycle operations
+  - name: dashboard
+    description: Live incident metrics
+  - name: categories
+    description: Historical ticket categories
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
+      description: Returns database and incident-classifier readiness
       responses:
         "200":
-          description: Healthy
+          description: Service status
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /incidents:
+    get:
+      operationId: listIncidents
+      tags: [incidents]
+      summary: List incidents
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+        - in: query
+          name: status
+          schema: { $ref: "#/components/schemas/IncidentStatus" }
+        - in: query
+          name: priority
+          schema: { $ref: "#/components/schemas/IncidentPriority" }
+        - in: query
+          name: category
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 100, default: 25 }
+        - in: query
+          name: offset
+          schema: { type: integer, minimum: 0, default: 0 }
+      responses:
+        "200":
+          description: Matching incidents
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IncidentList"
+    post:
+      operationId: createIncident
+      tags: [incidents]
+      summary: Report an incident
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentInput"
+      responses:
+        "201":
+          description: Created and automatically classified incident
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+        "400":
+          description: Invalid input
+  /incidents/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: { type: integer, minimum: 1 }
+    get:
+      operationId: getIncident
+      tags: [incidents]
+      summary: Get incident details
+      responses:
+        "200":
+          description: Incident details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+        "404":
+          description: Incident not found
+    patch:
+      operationId: updateIncident
+      tags: [incidents]
+      summary: Update incident fields or status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUpdate"
+      responses:
+        "200":
+          description: Updated incident
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+        "400":
+          description: Invalid update
+        "404":
+          description: Incident not found
+    delete:
+      operationId: deleteIncident
+      tags: [incidents]
+      summary: Delete an incident
+      responses:
+        "204":
+          description: Incident deleted
+        "404":
+          description: Incident not found
+  /incidents/{id}/analyze:
+    post:
+      operationId: analyzeIncident
+      tags: [incidents]
+      summary: Classify and investigate an incident
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer, minimum: 1 }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyzeIncidentInput"
+      responses:
+        "200":
+          description: Classification, historical matches, and safe resolution guidance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IncidentAnalysis"
+        "404":
+          description: Incident not found
+  /incidents/{id}/resolve:
+    post:
+      operationId: resolveIncident
+      tags: [incidents]
+      summary: Record resolution and human verification
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer, minimum: 1 }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResolveIncidentInput"
+      responses:
+        "200":
+          description: Resolution recorded; resolved only when verified by a person
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+        "400":
+          description: Resolution text is required
+        "404":
+          description: Incident not found
+  /incidents/{id}/events:
+    get:
+      operationId: getIncidentEvents
+      tags: [incidents]
+      summary: Get incident investigation history
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer, minimum: 1 }
+      responses:
+        "200":
+          description: Ordered incident activity
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IncidentEvent"
+        "404":
+          description: Incident not found
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [dashboard]
+      summary: Get live incident summary
+      responses:
+        "200":
+          description: Counts and recent incident activity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [categories]
+      summary: List known incident categories
+      responses:
+        "200":
+          description: Categories from historical tickets and live incidents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
 components:
   schemas:
     HealthStatus:
       type: object
+      additionalProperties: false
       properties:
         status:
           type: string
+          enum: [ok, degraded]
+        database:
+          type: string
+          enum: [connected, unavailable]
+        classifier:
+          type: string
+          enum: [ready, unavailable]
       required:
         - status
+        - database
+        - classifier
+    IncidentStatus:
+      type: string
+      enum: [open, in_progress, resolved, escalated, closed]
+    IncidentPriority:
+      type: string
+      enum: [low, medium, high, critical]
+    Incident:
+      type: object
+      additionalProperties: false
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        status: { $ref: "#/components/schemas/IncidentStatus" }
+        priority: { $ref: "#/components/schemas/IncidentPriority" }
+        predictedCategory: { type: ["string", "null"] }
+        category: { type: ["string", "null"] }
+        confidence: { type: ["number", "null"], minimum: 0, maximum: 1 }
+        reporterEmail: { type: ["string", "null"] }
+        assignedTo: { type: ["string", "null"] }
+        resolution: { type: ["string", "null"] }
+        resolutionMethod: { type: ["string", "null"] }
+        resolutionVerified: { type: boolean }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+        resolvedAt: { type: ["string", "null"], format: date-time }
+      required:
+        - id
+        - title
+        - description
+        - status
+        - priority
+        - predictedCategory
+        - category
+        - confidence
+        - reporterEmail
+        - assignedTo
+        - resolution
+        - resolutionMethod
+        - resolutionVerified
+        - createdAt
+        - updatedAt
+        - resolvedAt
+    IncidentInput:
+      type: object
+      additionalProperties: false
+      properties:
+        title: { type: string, minLength: 3, maxLength: 240 }
+        description: { type: string, minLength: 8, maxLength: 10000 }
+        priority: { $ref: "#/components/schemas/IncidentPriority" }
+        reporterEmail: { type: string, format: email }
+        assignedTo: { type: string, maxLength: 160 }
+      required: [title, description, priority]
+    IncidentUpdate:
+      type: object
+      additionalProperties: false
+      properties:
+        title: { type: string, minLength: 3, maxLength: 240 }
+        description: { type: string, minLength: 8, maxLength: 10000 }
+        status: { $ref: "#/components/schemas/IncidentStatus" }
+        priority: { $ref: "#/components/schemas/IncidentPriority" }
+        category: { type: ["string", "null"], maxLength: 160 }
+        assignedTo: { type: ["string", "null"], maxLength: 160 }
+    IncidentList:
+      type: object
+      additionalProperties: false
+      properties:
+        results:
+          type: array
+          items: { $ref: "#/components/schemas/Incident" }
+        total: { type: integer }
+        limit: { type: integer }
+        offset: { type: integer }
+      required: [results, total, limit, offset]
+    AnalyzeIncidentInput:
+      type: object
+      additionalProperties: false
+      properties:
+        similarLimit: { type: integer, minimum: 1, maximum: 5, default: 3 }
+    SimilarIncident:
+      type: object
+      additionalProperties: false
+      properties:
+        title: { type: string }
+        category: { type: string }
+        resolution: { type: ["string", "null"] }
+        similarity: { type: number, minimum: 0, maximum: 1 }
+      required: [title, category, resolution, similarity]
+    IncidentAnalysis:
+      type: object
+      additionalProperties: false
+      properties:
+        incident: { $ref: "#/components/schemas/Incident" }
+        predictedCategory: { type: string }
+        confidence: { type: number, minimum: 0, maximum: 1 }
+        method: { type: string }
+        rationale: { type: string }
+        similarIncidents:
+          type: array
+          items: { $ref: "#/components/schemas/SimilarIncident" }
+        recommendedResolution: { type: string }
+        resolutionMethod: { type: string }
+      required:
+        - incident
+        - predictedCategory
+        - confidence
+        - method
+        - rationale
+        - similarIncidents
+        - recommendedResolution
+        - resolutionMethod
+    ResolveIncidentInput:
+      type: object
+      additionalProperties: false
+      properties:
+        resolution: { type: string, minLength: 8, maxLength: 10000 }
+        verified: { type: boolean }
+      required: [resolution, verified]
+    IncidentEvent:
+      type: object
+      additionalProperties: false
+      properties:
+        id: { type: integer }
+        incidentId: { type: integer }
+        eventType: { type: string }
+        message: { type: string }
+        createdAt: { type: string, format: date-time }
+      required: [id, incidentId, eventType, message, createdAt]
+    Category:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string }
+        historicalCount: { type: integer }
+      required: [name, historicalCount]
+    CountByLabel:
+      type: object
+      additionalProperties: false
+      properties:
+        label: { type: string }
+        count: { type: integer }
+      required: [label, count]
+    DashboardSummary:
+      type: object
+      additionalProperties: false
+      properties:
+        total: { type: integer }
+        open: { type: integer }
+        inProgress: { type: integer }
+        resolved: { type: integer }
+        escalated: { type: integer }
+        byPriority:
+          type: array
+          items: { $ref: "#/components/schemas/CountByLabel" }
+        byCategory:
+          type: array
+          items: { $ref: "#/components/schemas/CountByLabel" }
+        recentIncidents:
+          type: array
+          items: { $ref: "#/components/schemas/Incident" }
+      required: [total, open, inProgress, resolved, escalated, byPriority, byCategory, recentIncidents]
 

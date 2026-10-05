@@ -1,0 +1,322 @@
+I want you to take this existing GitHub repository and turn it into a **fully functional, tested, and deployed web application**.
+
+REPOSITORY:
+https://github.com/AgorAI-Hackathon/IncidAI
+
+PROJECT:
+IncidAI — Intelligent Incident Classification & Resolution System
+
+IMPORTANT:
+This is an EXISTING project. Do NOT rebuild everything from scratch.
+
+Your first task is to inspect the ENTIRE repository and understand what is already implemented before making changes.
+
+Inspect and understand:
+
+* frontend/
+* backend/
+* itsm_ml_project/
+* ai-models/
+* deployment/
+* Docker configuration
+* PostgreSQL/database configuration
+* existing APIs
+* AI/ML components
+* RAG components
+* environment configuration
+* documentation
+* scripts
+* dependencies
+
+PRIMARY GOAL:
+
+I do NOT need a theoretical implementation or a mockup.
+
+I need a REAL APPLICATION that:
+
+1. Runs successfully.
+2. Has a working frontend.
+3. Has a working backend.
+4. Has a working database.
+5. Has working frontend-backend communication.
+6. Has working AI/ML functionality wherever already implemented.
+7. Has working incident-management functionality.
+8. Can be tested end-to-end.
+9. Can be deployed.
+10. Has a public working deployment URL.
+
+PRESERVE EXISTING WORK:
+
+* Reuse existing code wherever it works.
+* Reuse existing models and data.
+* Reuse existing APIs.
+* Reuse existing architecture where practical.
+* Do not unnecessarily rewrite working components.
+* Do not replace the existing project with a completely different application.
+* Do not delete useful functionality.
+
+FIRST PHASE — FULL REPOSITORY AUDIT:
+
+Before implementing anything:
+
+1. Inspect all important directories and files.
+2. Determine the current technology stack.
+3. Determine what already works.
+4. Determine what is incomplete.
+5. Determine what is broken.
+6. Determine how frontend, backend, database and ML services are supposed to communicate.
+7. Determine all required environment variables.
+8. Determine the correct way to run the project.
+9. Determine the correct way to deploy the project.
+
+Then immediately begin implementing and fixing the project.
+
+FUNCTIONALITY:
+
+Make the existing incident-management system work end-to-end.
+
+The main workflow should be:
+
+INCIDENT
+↓
+DETECTION / CREATION
+↓
+CLASSIFICATION
+↓
+INVESTIGATION
+↓
+AI/ML ANALYSIS
+↓
+ROOT-CAUSE / RECOMMENDATION
+↓
+RESOLUTION ACTION
+↓
+VERIFICATION
+↓
+RESOLVED or ESCALATED
+
+Use the existing AI/ML/RAG functionality in the repository wherever possible.
+
+Do not create fake AI functionality just to make the UI look complete.
+
+If some advanced functionality cannot safely be automated, implement a safe simulation/demo workflow rather than dangerous real-world actions.
+
+FRONTEND:
+
+Make sure the frontend actually works.
+
+Verify:
+
+* Dashboard
+* Incident list
+* Incident details
+* Incident creation/reporting
+* Incident status
+* Incident classification
+* AI/ML results
+* Investigation information
+* Resolution information
+* Resolution status
+* Error handling
+* Loading states
+* Search/filtering where already intended
+
+Every important button and action should actually work.
+
+Do not leave fake buttons, dead links, placeholder pages, or non-functional forms.
+
+BACKEND:
+
+Make sure the backend actually works.
+
+Verify:
+
+* API routes
+* Incident CRUD
+* Classification
+* Resolution functionality
+* AI/ML API communication
+* Database communication
+* Validation
+* Error handling
+* CORS/configuration
+* Authentication if already included
+* Logging where appropriate
+
+DATABASE:
+
+Configure the actual database required by the project.
+
+Make sure:
+
+* Database starts correctly.
+* Migrations work.
+* Required tables/models exist.
+* CRUD operations work.
+* Backend can connect to the database.
+* Frontend can retrieve real data through the backend.
+* Sample/demo data exists if required for the demonstration.
+
+AI / ML:
+
+Inspect the existing:
+
+* XGBoost components
+* BERT components
+* FAISS/RAG components
+* FastAPI ML service
+* Classification functionality
+* Auto-resolution functionality
+
+Make these components work with the rest of the application wherever possible.
+
+If model files or dependencies are missing, identify exactly what is required and implement the minimum practical solution.
+
+Do not invent credentials or secrets.
+
+ENVIRONMENT VARIABLES:
+
+Create/update the appropriate environment configuration.
+
+Provide an example environment file if needed.
+
+Never hardcode:
+
+* API keys
+* passwords
+* database credentials
+* tokens
+* private secrets
+
+If a secret is required, configure it through Replit Secrets/environment variables and tell me exactly what value I need to provide.
+
+ERROR HANDLING:
+
+You are responsible for debugging the project.
+
+If you encounter:
+
+* dependency errors
+* Python errors
+* Node errors
+* React errors
+* Django errors
+* FastAPI errors
+* database errors
+* API errors
+* CORS errors
+* build errors
+* deployment errors
+
+DO NOT simply report the error and stop.
+
+Investigate the cause, fix it, rerun the application, and continue.
+
+TESTING:
+
+After implementation, actually run the application.
+
+Test the major workflow from beginning to end.
+
+At minimum verify:
+
+1. Application starts.
+2. Frontend loads.
+3. Backend starts.
+4. Database connects.
+5. Frontend can communicate with backend.
+6. Incident can be created/viewed.
+7. Classification works.
+8. AI/ML functionality works where implemented.
+9. Resolution workflow works.
+10. Status updates work.
+11. Errors are handled.
+12. The production build succeeds.
+
+If something fails, fix it and test again.
+
+DEPLOYMENT:
+
+THIS IS MANDATORY.
+
+Do NOT stop after making it work locally.
+
+After the application is working:
+
+1. Configure production environment.
+2. Configure required services.
+3. Configure environment variables/secrets.
+4. Configure database for deployment.
+5. Configure frontend deployment.
+6. Configure backend deployment.
+7. Configure ML/FastAPI service if required.
+8. Configure all required ports/services.
+9. Deploy the application using Replit's deployment/hosting infrastructure.
+10. Verify the deployed application from the public URL.
+11. Test the deployed version, not just the local development version.
+
+If the architecture requires multiple services, configure them appropriately so the final public application works end-to-end.
+
+FINAL REQUIREMENT:
+
+Do not tell me:
+
+"Here is how you can do it."
+
+Actually DO it.
+
+Do not stop after creating a plan.
+
+Do not stop after generating code.
+
+Do not stop when the local application first starts.
+
+Continue through:
+
+INSPECT
+→ IMPLEMENT
+→ RUN
+→ TEST
+→ DEBUG
+→ FIX
+→ RE-RUN
+→ DEPLOY
+→ VERIFY
+
+until the project is working as completely as reasonably possible.
+
+PRIORITY ORDER:
+
+1. FUNCTIONALITY
+2. FRONTEND ↔ BACKEND INTEGRATION
+3. DATABASE
+4. AI/ML INTEGRATION
+5. TESTING
+6. DEPLOYMENT
+7. UI POLISH
+
+Do not spend excessive time redesigning the UI while core functionality is broken.
+
+HACKATHON DEMO:
+
+Make sure the final deployed application can demonstrate a realistic incident-resolution flow.
+
+A judge should be able to open the public URL and see the application working without needing to understand the source code.
+
+FINAL RESPONSE AFTER COMPLETION:
+
+Only after actually testing and deploying, provide:
+
+* What was fixed
+* What was implemented
+* What was tested
+* Any required environment variables/secrets
+* How to use the application
+* Public deployment URL
+* Any remaining limitations
+
+MOST IMPORTANT:
+
+I need a **WORKING + DEPLOYED APPLICATION**, not merely source code.
+
+Use the existing IncidAI repository as the foundation and do everything necessary to make it functional and deploy it.

@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build as esbuild } from "esbuild";
 import esbuildPluginPino from "esbuild-plugin-pino";
-import { rm } from "node:fs/promises";
+import { copyFile, mkdir, rm } from "node:fs/promises";
 
 // Plugins (e.g. 'esbuild-plugin-pino') may use `require` to resolve dependencies
 globalThis.require = createRequire(import.meta.url);
@@ -118,6 +118,17 @@ globalThis.__dirname = __bannerPath.dirname(globalThis.__filename);
     `,
     },
   });
+
+  const classifierDataSource = path.resolve(
+    artifactDir,
+    "../incidai/source/ai-models/data/processed/clean_tickets.csv",
+  );
+  const classifierDataBundle = path.resolve(
+    distDir,
+    "data/clean_tickets.csv",
+  );
+  await mkdir(path.dirname(classifierDataBundle), { recursive: true });
+  await copyFile(classifierDataSource, classifierDataBundle);
 }
 
 buildAll().catch((err) => {

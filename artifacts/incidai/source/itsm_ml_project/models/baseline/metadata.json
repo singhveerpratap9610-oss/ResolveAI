@@ -1,0 +1,27 @@
+{
+  "model_type": "xgboost",
+  "val_accuracy": 0.8923339011925042,
+  "val_f1": 0.8918244442981952,
+  "num_classes": 19,
+  "classes": [
+    "AS400",
+    "Backup Management",
+    "Db Management - Oracle",
+    "Db Management - Sql",
+    "Db2 - Database",
+    "Infosec",
+    "Messaging Domino",
+    "Network Management",
+    "SIM ANALYSIS",
+    "Security Management",
+    "Server Management",
+    "Server Management - AIX",
+    "Server Management - Linux",
+    "Server Management - SOLARIS",
+    "Server Management - Unix",
+    "Server Management-AVPM",
+    "Server Management-L2",
+    "Storage Support",
+    "VMWARE"
+  ]
+}

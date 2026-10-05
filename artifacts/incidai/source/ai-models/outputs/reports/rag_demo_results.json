@@ -1,0 +1,104 @@
+[
+  {
+    "title": "Unable to access shared folder",
+    "description": "User cannot access the HR shared folder. Getting permission denied error when trying to open.",
+    "predicted_category": "Storage Support",
+    "resolution": "Based on similar ticket (Category: Storage Support):\n\nChange call raised for the same. Hence we are closing this call. CM:25418\n\nNote: This resolution is based on a similar past ticket. Please verify the steps are appropriate for your specific case.\n\nAdditional considerations:\n- Verify user permissions and access rights\n- Check if any recent system changes might affect the resolution\n- Document the actual steps taken for future reference\n",
+    "similar_tickets_count": 5,
+    "resolution_method": "Rule-based",
+    "similar_tickets": [
+      {
+        "similarity": 0.6236721873283386,
+        "category": "Storage Support",
+        "title": "shared folder access",
+        "description": "shared folder access \\\\fs1\\HR_Reports_Repository \\\\fs1\\Staffing STHOM0113 Shieo Thomas",
+        "resolution": "Change call raised for the same. Hence we are closing this call. CM:25418",
+        "priority": "P4-30-240"
+      },
+      {
+        "similarity": 0.6005921363830566,
+        "category": "Server Management",
+        "title": "RE: provide access on \\\\fs1\\hrd network path. #IM419678 #RF 941247 #RF942111",
+        "description": "Hi Siva , User is not able to open sub folder. Please check. Regards Megha",
+        "resolution": "Hi Megha, Access has been Provided. Please ask user to log-off and login to gain access. Thanks\u00e2\u0080\u00a6 S.SivaRaj Server Management",
+        "priority": "P4-240-2880"
+      },
+      {
+        "similarity": 0.5945667028427124,
+        "category": "Server Management",
+        "title": "File access Issue_#IM375522",
+        "description": "multiple user is facing issue in accessing file on below path mentioned. Users are not able to open or copy file from share drive. Path- \\\\fs1\\Group Bussiness\\Group Insurance 2\\group insurance\\group insurance\\Client Master Files\\Credit Life\\Axis Bank\\Axis Bank Auto Loan (Level-35001847) & (Reducing-35001848)\\COI\\COI\\2016\\Jan -2016\\22-Jan-2016\\1848\\PDF with Logo Regards, Ankur Gadwal",
+        "resolution": "Received confirmation to close this Ticket from Shared Team. Hence Closed. Mail has been uploaded.",
+        "priority": "P4-240-2880"
+      }
+    ]
+  },
+  {
+    "title": "Database connection timeout",
+    "description": "Oracle database connection is timing out. Application shows error after 30 seconds of trying to connect.",
+    "predicted_category": "Server Management - AIX",
+    "resolution": "Based on similar ticket (Category: Server Management - AIX):\n\nWe couldn\u00e2\u0080\u0099t found any abnormalities from OS end in both the servers. Same has been informed to user. Hence we are closing this call.\n\nNote: This resolution is based on a similar past ticket. Please verify the steps are appropriate for your specific case.\n\nAdditional considerations:\n- Verify user permissions and access rights\n- Check if any recent system changes might affect the resolution\n- Document the actual steps taken for future reference\n",
+    "similar_tickets_count": 5,
+    "resolution_method": "Rule-based",
+    "similar_tickets": [
+      {
+        "similarity": 0.5901310443878174,
+        "category": "Server Management - AIX",
+        "title": "We were facing issue while connecting to Sybase database server)172.23.51.203) from AIX server(172.23.102.54)., # IM 381825",
+        "description": "We were facing issue while connecting to Sybase database server)172.23.51.203) from AIX server(172.23.102.54). We faced this issue between 4 AM to 7:40 AM. We have cress checked database was up and running during that duration. Could you please check and share RCA for the same.Screenshot attached regards Vikas Garg 9582111189 vikas.garg1@maxlifeinsurance.com",
+        "resolution": "We couldn\u00e2\u0080\u0099t found any abnormalities from OS end in both the servers. Same has been informed to user. Hence we are closing this call.",
+        "priority": "P3-30-240"
+      },
+      {
+        "similarity": 0.5766493678092957,
+        "category": "Network Management",
+        "title": "faced the same issue, while connecting to Sybase database server",
+        "description": "while connecting to Sybase database server(172.23.51.203) from AIX server(172.23.102.54). We faced this issue between 6 AM to 7 AM.",
+        "resolution": "We have discussed with User Bhaskar 90A location (9915290938) as of now he is on leave. he has shared another User details (9582111189 Vikas) but he left the office now, we have analyze no issue from network end, hence we are closing the call from our end and informed helpdesk team to call us if any clarification required.",
+        "priority": "P3-30-240"
+      },
+      {
+        "similarity": 0.5590686202049255,
+        "category": "Server Management - AIX",
+        "title": "We were facing issue while connecting to Sybase database server(172.23.51.203) from AIX server(172.23.102.54). We faced this issue between 5 AM to 6 AM. We have cross checked database was up and running during that duration.",
+        "description": "We were facing issue while connecting to Sybase database server(172.23.51.203) from AIX server(172.23.102.54). We faced this issue between 5 AM to 6 AM. We have cross checked database was up and running during that duration. LoginID bk25925 UserName Bhaskar Khare EmployeeId 25925 Email bhaskar.khare@maxlifeinsurance.com con:LoginID bk25925 UserName Bhaskar Khare EmployeeId 25925 Email bhaskar.khare@maxlifeinsurance.com LoginID bk25925 UserName Bhaskar Khare EmployeeId 25925 Email bhaskar.khare@maxlifeinsurance.com LoginID bk25925 UserName Bhaskar Khare EmployeeId 25925 Email bhaskar.khare@maxlifeinsurance.com con:9915290938",
+        "resolution": "We have not found any abnormalities found from OS end. We have informed requester to check with network and DB for the same. Hence we are closing this call.",
+        "priority": "P3-30-240"
+      }
+    ]
+  },
+  {
+    "title": "Email not syncing",
+    "description": "User emails are not syncing to mobile device. Desktop Outlook works fine but mobile app shows old emails.",
+    "predicted_category": "Messaging Domino",
+    "resolution": "Based on similar ticket (Category: Messaging Domino):\n\nWe have reset the traveler profile of mentioned user, Kindly reconfigure traveler.\n\nNote: This resolution is based on a similar past ticket. Please verify the steps are appropriate for your specific case.\n\nAdditional considerations:\n- Verify user permissions and access rights\n- Check if any recent system changes might affect the resolution\n- Document the actual steps taken for future reference\n",
+    "similar_tickets_count": 5,
+    "resolution_method": "Rule-based",
+    "similar_tickets": [
+      {
+        "similarity": 0.6710676550865173,
+        "category": "Messaging Domino",
+        "title": NaN,
+        "description": "Lotus mails are not synching in mobile. LoginID kshom2958 UserName Kumar Saurabh",
+        "resolution": "We have reset the traveler profile of mentioned user, Kindly reconfigure traveler.",
+        "priority": "P3-30-240"
+      },
+      {
+        "similarity": 0.5182018280029297,
+        "category": "Messaging Domino",
+        "title": "No mail receive in mailbox.#IM499633",
+        "description": "No mail receive in mailbox. SSo ID: pkdcal2115 Mobile: 9836069964 ** Same issue in Inotes",
+        "resolution": "The below mentioned ID has been already migrated to O365 , Asked user to access the outlook to check the new mails. pratik.das@maxlifeinsurance.com Hence closing this call",
+        "priority": "P3-30-240"
+      },
+      {
+        "similarity": 0.4879424571990967,
+        "category": "Messaging Domino",
+        "title": "Re: Mails are not auto synching in traveler #IM 459920 #IM 1831629",
+        "description": "Mails are not auto synching in traveller, please check. SSO ID: ASCAL1905 Amit Samanta 9836235558",
+        "resolution": "IM1831629 Scheduled sync settings are available from the settings display of the IBM Traveler application. Select the settings for Auto Sync, and then select Schedule. You can set the behavior for two time periods; a peak time schedule and an off-peak schedule. The sync settings can be any of the following: \u00e2\u0080\u00a2 Always connected \u00e2\u0080\u00a2 Manual \u00e2\u0080\u00a2 Every 15 minutes \u00e2\u0080\u00a2 Every 30 minutes \u00e2\u0080\u00a2 Every hour \u00e2\u0080\u00a2 Every 2 hours If you specify a different sync setting for peak and off-peak times, then you must specify the peak time period. You can define the days of the week for the peak time and when the peak time should start and stop. For example, you might define the sync behavior to be Always Connected between your working hours (Monday \u00e2\u0080\u0093 Friday, 8 a.m. to 6 p.m.), then define your off-peak setting as Every 2 hours.",
+        "priority": "P3-30-240"
+      }
+    ]
+  }
+]

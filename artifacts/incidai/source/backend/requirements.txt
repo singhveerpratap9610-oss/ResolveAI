@@ -1,0 +1,38 @@
+# Django Backend Requirements for ITSM Hackathon Project
+# Core Django packages
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+psycopg2-binary==2.9.9
+python-decouple==3.8
+gunicorn==21.2.0
+whitenoise==6.6.0
+
+# Database and Authentication
+dj-database-url==2.1.0
+django-environ==0.11.2
+
+# API Documentation
+drf-spectacular==0.27.0
+
+# ML/AI Integration (matching your existing project)
+scikit-learn==1.3.2
+numpy==1.24.3
+pandas==2.1.3
+joblib==1.3.2
+sentence-transformers==2.2.2
+faiss-cpu==1.7.4
+transformers==4.35.2
+torch==2.1.1
+xgboost==2.0.2
+
+# Optional LLM Integration
+openai==1.3.7
+python-dotenv==1.0.0
+
+# Testing
+pytest==7.4.3
+pytest-django==4.7.0
+
+# Utilities
+Pillow==10.1.0
